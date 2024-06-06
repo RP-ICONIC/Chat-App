@@ -10,13 +10,33 @@ socket.on("locationMessage", (coordinates) => {
   );
 });
 
-document.querySelector("form").addEventListener("submit", (e) => {
+const chatForm = document.querySelector("#chat-form");
+const inputMsg = chatForm.querySelector("input");
+const sendButton = chatForm.querySelector("button");
+
+chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const message = document.querySelector("input").value;
-  socket.emit("sendMessage", message);
+  if (inputMsg.value === "") return;
+
+  sendButton.setAttribute("disabled", "disabled");
+
+  const message = inputMsg.value;
+  socket.emit("sendMessage", message, (err) => {
+    sendButton.removeAttribute("disabled");
+    inputMsg.value = "";
+    inputMsg.focus();
+
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("message sent successfully");
+    }
+  });
 });
 
-document.querySelector("#share-location").addEventListener("click", () => {
+const shareLocationBtn = document.querySelector("#share-location");
+
+shareLocationBtn.addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition((position) => {
     socket.emit("sendLocation", {
       lat: position.coords.latitude,
