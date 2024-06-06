@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendLocation", (coordinates) => {
-    io.emit("locationMessage", coordinates);
+    io.emit("locationMessage", handler.locationMessage(coordinates));
   });
 
   socket.on("disconnect", () => {

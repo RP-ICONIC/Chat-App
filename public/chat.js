@@ -20,7 +20,10 @@ socket.on("locationMessage", (coordinates) => {
     `http://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`
   );
   const url = `http://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`;
-  const html = Mustache.render(locationMessageTemplate, { url: url });
+  const html = Mustache.render(locationMessageTemplate, {
+    url: coordinates.url,
+    createdAt: moment(coordinates.createdAt).format("h:mm a"),
+  });
   allMessages.insertAdjacentHTML("beforeend", html);
 });
 
