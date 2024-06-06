@@ -7,14 +7,18 @@ const Filter = require("bad-words");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const handler = require("./utils/messages");
 
 app.use(express.static(path.join(__dirname, "public")));
 
 io.on("connection", (socket) => {
   console.log("a new connection established!!!");
 
-  socket.emit("message", "welcome to the chat");
-  socket.broadcast.emit("message", "a new user has joined....");
+  socket.emit("message", handler.generateMessage("welcome to the chat"));
+  socket.broadcast.emit(
+    "message",
+    handler.generateMessage("a new user has joined....")
+  );
 
   socket.on("sendMessage", (message, callback) => {
     const filter = new Filter();
@@ -23,7 +27,7 @@ io.on("connection", (socket) => {
     }
 
     // const filteredMsg = filter.clean(message);
-    io.emit("message", message);
+    io.emit("message", handler.generateMessage(message));
     callback();
   });
 
@@ -32,7 +36,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    io.emit("message", "a user has left....");
+    io.emit("message", handler.generateMessage("a user has left...."));
   });
 });
 

@@ -1,13 +1,27 @@
 const socket = io();
 
-socket.on("message", (msg) => {
-  console.log(msg);
+const allMessages = document.querySelector("#messages");
+const messageTemplate = document.querySelector("#msg-template").innerHTML;
+const locationMessageTemplate = document.querySelector(
+  "#location-msg-template"
+).innerHTML;
+
+socket.on("message", (message) => {
+  console.log(message);
+  const html = Mustache.render(messageTemplate, {
+    msg: message.text,
+    createdAt: moment(message.createdAt).format("h:mm a"),
+  });
+  allMessages.insertAdjacentHTML("beforeend", html);
 });
 
 socket.on("locationMessage", (coordinates) => {
   console.log(
     `http://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`
   );
+  const url = `http://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`;
+  const html = Mustache.render(locationMessageTemplate, { url: url });
+  allMessages.insertAdjacentHTML("beforeend", html);
 });
 
 const chatForm = document.querySelector("#chat-form");
