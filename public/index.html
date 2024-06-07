@@ -3,51 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Chit - Chat</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <title>Join Chit - Chat</title>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>Room Members</h2>
-            <ul id="room-members">
-                <!-- Room members will be dynamically inserted here -->
-            </ul>
-        </aside>
-        <main class="chat-container">
-            <!-- <h1>Chit - Chat</h1> -->
-            <div id="messages"></div>
-            <form id="chat-form">
-                <input type="text" placeholder="Type Something" id="msg">
-                <button class="btn">Send</button>
-            </form>
-            <button id="share-location">Share Location</button>
-        </main>
-    </div>
-
-    <script id="msg-template" type="text/html">
-      <div>
-        <p>
-          <span id="username">UserName</span>
-          <span id="time">{{createdAt}}</span>
-        </p>
-        <p>{{msg}}</p>
-      </div>
-    </script>
-
-    <script id="location-msg-template" type="text/html">
-      <div>
-        <p>
-          <span id="username">UserName</span>
-          <span id="time">{{createdAt}}</span>
-        </p>
-        <p><a href="{{url}}" target="_blank">My Location</a></p>
-      </div>
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="chat.js"></script>
+  <div class="join-container">
+    <header class="join-header">
+      <h1>Chit - Chat</h1>
+    </header>
+    <main class="join-main">
+      <form action="./main.html" id="join-form">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter username" required>
+        
+          <label for="room">Room</label>
+          <input type="text" id="room" name="room" placeholder="Enter room name" required>
+        </div>
+        <button type="submit" class="btn">Join Chat</button>
+      </form>
+    </main>
+  </div>
 </body>
 </html>
