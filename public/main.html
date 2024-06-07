@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <title>Chit - Chat</title>
 </head>
 <body>
@@ -15,7 +19,7 @@
             <!-- <h1>Chit - Chat</h1> -->
             <div id="messages"></div>
             <form id="chat-form">
-                <input type="text" placeholder="Type Something" id="msg" required autocomplete="off">
+                <input type="text" placeholder="Type Something" id="input-msg" required autocomplete="off">
                 <button class="btn">Send</button>
             </form>
             <button id="share-location">Share Location</button>
@@ -23,7 +27,7 @@
     </div>
 
     <script id="msg-template" type="text/html">
-      <div>
+      <div id="tempate-div">
         <p>
           <span id="username">{{username}}</span>
           <span id="time">{{createdAt}}</span>
@@ -33,7 +37,7 @@
     </script>
 
     <script id="location-msg-template" type="text/html">
-      <div>
+      <div id="tempate-div">
         <p>
           <span id="username">{{username}}</span>
           <span id="time">{{createdAt}}</span>
